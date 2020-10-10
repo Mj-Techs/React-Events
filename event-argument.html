@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="./js/react.development.js"></script>
+    <script src="./js/react-dom.development.js"></script>
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+      const rootHandle = document.getElementById("root");
+
+      const users = [
+        { id: 1, name: "user1", email: "u1@gmail.com" },
+        { id: 2, name: "user2", email: "u2@gmail.com" },
+        { id: 3, name: "user3", email: "u3@gmail.com" },
+      ];
+
+      /* 
+        1.Create UserList component
+        2.pass users array as a prop to the component
+        3.Return a list of users
+        4.Each user to have a button
+        5.When clicked the button ,display the user details in an alert box
+      */
+      function UserList(props) {
+        function showDetails(ele) {
+          alert(`${ele.id} - ${ele.name} - ${ele.email}`);
+        }
+        return (
+          <ul>
+            {props.users.map((ele) => {
+              return (
+                <li key={ele.id}>
+                  {ele.name}
+                  <button
+                    onClick={() => {
+                      showDetails(ele);
+                    }}
+                  >
+                    Show
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        );
+      }
+
+      const ele = <UserList users={users} />;
+      ReactDOM.render(ele, rootHandle);
+    </script>
+  </body>
+</html>
